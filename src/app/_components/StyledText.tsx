@@ -5,6 +5,6 @@ interface TextProps {
 }
 
 const StyledText = ({ children }: TextProps) => {
-  return <span className="text-[#582F03] font-bold text-3xl">{children}</span>;
+  return <span className="text-[#] font-bold text-3xl">{children}</span>;
 };
 export default StyledText;
