@@ -88,6 +88,7 @@ const page = () => {
       <CardFooter>
         <Button asChild className="w-full">
           <Link href="/">Sign Up</Link>
+          {/* Route to Home Page, Reference Wireframe */}
         </Button>
       </CardFooter>
     </Card>
