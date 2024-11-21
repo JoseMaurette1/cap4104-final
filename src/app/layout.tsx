@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "./_components/themeprovider";
+import Logo from "./_components/Logo";
+import Navbar from "./_components/Navbar";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
@@ -25,11 +28,20 @@ interface LayoutProps {
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={` min-h-screen flex justify-center items-center ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`min-h-screen flex justify-center items-center ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Logo />
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
