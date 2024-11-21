@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -85,7 +86,9 @@ const page = () => {
         </form>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">Sign Up</Button>
+        <Button asChild className="w-full">
+          <Link href="/">Sign Up</Link>
+        </Button>
       </CardFooter>
     </Card>
   );
