@@ -7,7 +7,7 @@ import { Camera } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <div className="fixed top-5 w-full flex justify-center items-center gap-12 shadow-md p-4 z-10">
+    <div className="fixed top-5 flex justify-center items-center gap-12 p-4 z-10">
       <Search />
       <Mountain />
       <Camera />
