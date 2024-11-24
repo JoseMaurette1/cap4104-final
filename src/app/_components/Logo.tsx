@@ -11,11 +11,9 @@ const Logo = () => {
             TrailTales
           </h1>
         </Link>
-        {/* Left Corner Logo */}
       </div>
       <div className="absolute top-5 right-5">
         <ModeToggle />
-        {/* Severe: The button broke and it is not clickable, 11/23/24 */}
       </div>
     </>
   );
