@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import {
@@ -90,6 +91,10 @@ const SignUp = () => {
           <Link href="/">Sign Up</Link>
           {/* Route to Home Page, Reference Wireframe */}
         </Button>
+      </CardFooter>
+      <CardFooter className="justify-center pl-2">
+        <Checkbox />
+        <label className="text-xs pl-2">Remember me</label>
       </CardFooter>
     </Card>
   );
