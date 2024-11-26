@@ -1,9 +1,7 @@
 import React from "react";
-import { Search } from "lucide-react";
+import { User, Search, Mountain, Camera } from "lucide-react";
 // import Link from "next/link";
 // import { Button } from "@/components/ui/button";
-import { Mountain } from "lucide-react";
-import { Camera } from "lucide-react";
 
 const Navbar = () => {
   return (
@@ -11,6 +9,7 @@ const Navbar = () => {
       <Search />
       <Mountain />
       <Camera />
+      <User />
       {/* Todo: Add href for each icon */}
       {/* Todo: use Link and Button property asChild */}
     </div>
