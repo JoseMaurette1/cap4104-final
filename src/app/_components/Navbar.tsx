@@ -13,7 +13,7 @@ const Navbar = () => {
     <div className="fixed top-5 flex justify-center items-center gap-12 p-4 z-10">
       {icons.map(({ href, Icon }, index) => (
         <Link key={index} href={href}>
-          <Icon className="underline-effect" />
+          <Icon />
         </Link>
       ))}
     </div>
