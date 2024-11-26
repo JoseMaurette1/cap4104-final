@@ -1,17 +1,21 @@
 import React from "react";
 import { User, Search, Mountain, Camera } from "lucide-react";
-// import Link from "next/link";
-// import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Navbar = () => {
+  const icons = [
+    { href: "/Search", Icon: Search },
+    { href: "/Trails", Icon: Mountain },
+    { href: "/Camera", Icon: Camera },
+    { href: "/Profile", Icon: User },
+  ];
   return (
     <div className="fixed top-5 flex justify-center items-center gap-12 p-4 z-10">
-      <Search />
-      <Mountain />
-      <Camera />
-      <User />
-      {/* Todo: Add href for each icon */}
-      {/* Todo: use Link and Button property asChild */}
+      {icons.map(({ href, Icon }, index) => (
+        <Link key={index} href={href}>
+          <Icon className="underline-effect" />
+        </Link>
+      ))}
     </div>
   );
 };
