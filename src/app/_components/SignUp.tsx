@@ -88,7 +88,7 @@ const SignUp = () => {
       </CardContent>
       <CardFooter>
         <Button asChild className="w-full">
-          <Link href="/">Sign Up</Link>
+          <Link href="/Home">Sign Up</Link>
           {/* Route to Home Page, Reference Wireframe */}
         </Button>
       </CardFooter>
