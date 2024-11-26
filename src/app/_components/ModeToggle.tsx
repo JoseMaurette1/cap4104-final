@@ -38,3 +38,5 @@ export function ModeToggle() {
     </DropdownMenu>
   );
 }
+
+// Todo: Add state for Light and Dark Mode, whenever you go on a new page it resets back to default
