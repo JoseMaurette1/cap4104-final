@@ -1,7 +1,7 @@
 import React from "react";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { SquareUserRound, Bookmark, MessageSquareMore } from "lucide-react";
+import { User, Bookmark, MessageSquareMore, Grid3x3 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -28,7 +28,9 @@ const page = () => {
     <Card className="w-full max-w-7xl mx-auto">
       <CardHeader>
         <CardTitle className="pb-5">
-          Username
+          <p className="flex items-center">
+            <User /> User.name
+          </p>
           {/* use LocalStorage for Signup, render here */}
         </CardTitle>
         <CardDescription>
@@ -38,10 +40,19 @@ const page = () => {
       </CardHeader>
       <Separator className="mb-4" />
       <CardContent>
-        <div className="flex justify-center items-center rounded-md gap-20 p-4">
-          <p className="text-muted-foreground">Posts</p>
-          <p className="text-muted-foreground">Bookmarks</p>
-          <p className="text-muted-foreground">Comments</p>
+        <div className="flex justify-center items-center rounded-md gap-36 p-4">
+          <p className="text-muted-foreground flex items-center">
+            <Grid3x3 />
+            Posts
+          </p>
+          <p className="text-muted-foreground flex items-center">
+            <Bookmark />
+            Bookmarks
+          </p>
+          <p className="text-muted-foreground flex items-center pr-2">
+            <MessageSquareMore />
+            Comments
+          </p>
         </div>
         <Grid />
       </CardContent>
