@@ -30,7 +30,7 @@ const Welcome = () => {
           Social Media
         </p>
         <div className="mt-5">
-          <Link href={"/Login"}>
+          <Link href={"/Signup"}>
             <Button
               size="lg"
               variant="default"
