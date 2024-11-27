@@ -10,7 +10,7 @@ const Navbar = () => {
     { href: "/Profile", Icon: User },
   ];
   return (
-    <div className="fixed top-5 flex justify-center items-center gap-12 p-4 z-10">
+    <div className="absolute top-5 flex justify-center items-center gap-12 p-4 z-10">
       {icons.map(({ href, Icon }, index) => (
         <Link key={index} href={href}>
           <Icon />
