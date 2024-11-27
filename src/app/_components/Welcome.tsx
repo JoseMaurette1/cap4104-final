@@ -8,7 +8,6 @@ import { CircleArrowRight } from "lucide-react";
 const Welcome = () => {
   return (
     <div className="flex flex-col items-center justify-center px-4 sm:px-8">
-      {/* Logo Section */}
       <div className="flex justify-center -mt-16 sm:mt-0 mb-6">
         <Image
           src={"/TT.png"}
@@ -19,7 +18,6 @@ const Welcome = () => {
         />
       </div>
 
-      {/* Welcome Text */}
       <div className="text-center">
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">
           Welcome to <StyledText>TrailTales</StyledText>
@@ -33,7 +31,6 @@ const Welcome = () => {
           for Social Media
         </p>
 
-        {/* Sign-up Button */}
         <div>
           <Link href={"/Signup"}>
             <Button
