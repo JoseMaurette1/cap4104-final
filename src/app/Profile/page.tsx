@@ -25,10 +25,10 @@ const page = () => {
   );
 
   return (
-    <Card className="w-full max-w-7xl mx-auto">
+    <Card className="w-full max-w-7xl mx-auto px-4 sm:px-8">
       <CardHeader>
         <CardTitle className="pb-5">
-          <p className="flex items-center">
+          <p className="flex items-center text-center sm:text-left">
             <User /> User.name
           </p>
           {/* use LocalStorage for Signup, render here */}
@@ -40,7 +40,7 @@ const page = () => {
       </CardHeader>
       <Separator className="mb-4" />
       <CardContent>
-        <div className="flex justify-center items-center rounded-md gap-36 p-4">
+        <div className="flex flex-col sm:flex-row justify-center items-center rounded-md gap-8 sm:gap-36 p-4">
           <p className="text-muted-foreground flex items-center">
             <Grid3x3 />
             Posts
