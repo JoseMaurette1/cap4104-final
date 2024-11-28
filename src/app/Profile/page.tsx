@@ -22,7 +22,7 @@ const ProfilePage = () => {
     if (storedBio) {
       setBio(storedBio);
     }
-  });
+  }, [bio]);
 
   const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setBio(event.target.value);
