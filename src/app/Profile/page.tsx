@@ -16,30 +16,11 @@ import Image from "next/image";
 const ProfilePage = () => {
   const [bio, setBio] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false);
-
-  useEffect(() => {
-    const storedBio = localStorage.getItem("bio");
-    if (storedBio) {
-      setBio(storedBio);
-    }
-  }, [bio]);
-
-  const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setBio(event.target.value);
-  };
-
-  const handleSaveBio = () => {
-    localStorage.setItem("bio", bio);
-    setIsEditing(false);
-  };
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
+  const [activeSection, setActiveSection] = useState<string>("Posts");
   const [likedTrails, setLikedTrails] = useState<{ [key: string]: boolean }>(
     {}
   );
+
   const trails = [
     { image: "/yosemite.jpg", trail: "Yosemite Valley" },
     { image: "/lake-louise.jpg", trail: "Lake Louise" },
@@ -52,17 +33,26 @@ const ProfilePage = () => {
   ];
 
   useEffect(() => {
+    const storedBio = localStorage.getItem("bio");
     const storedLikes = localStorage.getItem("likedTrails");
-    if (storedLikes) {
-      setLikedTrails(JSON.parse(storedLikes));
-    }
+    if (storedBio) setBio(storedBio);
+    if (storedLikes) setLikedTrails(JSON.parse(storedLikes));
   }, []);
+
+  const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setBio(event.target.value);
+  };
+
+  const handleSaveBio = () => {
+    localStorage.setItem("bio", bio);
+    setIsEditing(false);
+  };
 
   const likedTrailNames = Object.keys(likedTrails).filter(
     (trail) => likedTrails[trail]
   );
 
-  const Grid = () => (
+  const BookmarksGrid = () => (
     <div className="flex flex-wrap w-full max-w-xl mx-auto gap-4">
       {trails
         .filter((trail) => likedTrailNames.includes(trail.trail))
@@ -70,7 +60,6 @@ const ProfilePage = () => {
           <div
             key={index}
             className="w-1/4 aspect-square border border-gray-400 rounded-md overflow-hidden"
-            style={{ boxSizing: "border-box" }}
           >
             <Image
               src={image}
@@ -81,6 +70,18 @@ const ProfilePage = () => {
             />
           </div>
         ))}
+    </div>
+  );
+
+  const PostsGrid = () => (
+    <div className="flex flex-wrap w-full max-w-xl mx-auto">
+      {[...Array(16)].map((_, index) => (
+        <div
+          key={index}
+          className="w-1/4 aspect-square border border-gray-400"
+          style={{ boxSizing: "border-box" }}
+        />
+      ))}
     </div>
   );
 
@@ -102,30 +103,46 @@ const ProfilePage = () => {
           />
           <button
             className="pt-2"
-            onClick={isEditing ? handleSaveBio : handleEditClick}
+            onClick={isEditing ? handleSaveBio : () => setIsEditing(true)}
           >
             {isEditing ? "Save" : "Edit"}
           </button>
-          {/* Todo: Edit and Save function is broken */}
         </CardDescription>
       </CardHeader>
       <Separator className="mb-4" />
       <CardContent>
         <div className="flex flex-col sm:flex-row justify-center items-center rounded-md gap-8 sm:gap-36 p-4">
-          <p className="text-muted-foreground flex items-center">
+          <p
+            className={`cursor-pointer ${
+              activeSection === "Posts" ? "text-white" : "text-gray-400"
+            }`}
+            onClick={() => setActiveSection("Posts")}
+          >
             <Grid3x3 className="mr-2" />
             Posts
           </p>
-          <p className="text-muted-foreground flex items-center">
+          <p
+            className={`cursor-pointer ${
+              activeSection === "Bookmarks" ? "text-white" : "text-gray-400"
+            }`}
+            onClick={() => setActiveSection("Bookmarks")}
+          >
             <Bookmark className="mr-2" />
             Bookmarks
           </p>
-          <p className="text-muted-foreground flex items-center pr-2">
+          <p
+            className={`cursor-pointer ${
+              activeSection === "Comments" ? "text-white" : "text-gray-400"
+            }`}
+            onClick={() => setActiveSection("Comments")}
+          >
             <MessageSquareMore className="mr-2" />
             Comments
           </p>
         </div>
-        <Grid />
+        {activeSection === "Bookmarks" && <BookmarksGrid />}
+        {activeSection === "Posts" && <PostsGrid />}
+        {activeSection === "Comments" && <p>Display Comments Here</p>}
       </CardContent>
       <CardFooter>{/* Add Footer here */}</CardFooter>
     </Card>
