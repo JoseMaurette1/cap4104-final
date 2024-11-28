@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { User, Bookmark, MessageSquareMore, Grid3x3 } from "lucide-react";
@@ -10,17 +11,76 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Image from "next/image";
 
-const page = () => {
+const ProfilePage = () => {
+  const [bio, setBio] = useState<string>("");
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+
+  useEffect(() => {
+    const storedBio = localStorage.getItem("bio");
+    if (storedBio) {
+      setBio(storedBio);
+    }
+  });
+
+  const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setBio(event.target.value);
+  };
+
+  const handleSaveBio = () => {
+    localStorage.setItem("bio", bio);
+    setIsEditing(false);
+  };
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const [likedTrails, setLikedTrails] = useState<{ [key: string]: boolean }>(
+    {}
+  );
+  const trails = [
+    { image: "/yosemite.jpg", trail: "Yosemite Valley" },
+    { image: "/lake-louise.jpg", trail: "Lake Louise" },
+    { image: "/bald-mountains.jpg", trail: "Bald Mountains" },
+    { image: "/latemar.jpg", trail: "Latemar" },
+    { image: "/vanoise.jpg", trail: "Vanoise National Park" },
+    { image: "/lago.jpg", trail: "Lago di Braies" },
+    { image: "/oldcutler.jpg", trail: "Old Cutler Trail" },
+    { image: "/everglades.jpg", trail: "Everglades Trail" },
+  ];
+
+  useEffect(() => {
+    const storedLikes = localStorage.getItem("likedTrails");
+    if (storedLikes) {
+      setLikedTrails(JSON.parse(storedLikes));
+    }
+  }, []);
+
+  const likedTrailNames = Object.keys(likedTrails).filter(
+    (trail) => likedTrails[trail]
+  );
+
   const Grid = () => (
-    <div className="flex flex-wrap w-full max-w-xl mx-auto">
-      {[...Array(16)].map((_, index) => (
-        <div
-          key={index}
-          className="w-1/4 aspect-square border border-gray-400"
-          style={{ boxSizing: "border-box" }}
-        />
-      ))}
+    <div className="flex flex-wrap w-full max-w-xl mx-auto gap-4">
+      {trails
+        .filter((trail) => likedTrailNames.includes(trail.trail))
+        .map(({ image, trail }, index) => (
+          <div
+            key={index}
+            className="w-1/4 aspect-square border border-gray-400 rounded-md overflow-hidden"
+            style={{ boxSizing: "border-box" }}
+          >
+            <Image
+              src={image}
+              alt={trail}
+              width={300}
+              height={300}
+              className="object-cover w-full h-full"
+            />
+          </div>
+        ))}
     </div>
   );
 
@@ -29,36 +89,47 @@ const page = () => {
       <CardHeader>
         <CardTitle className="pb-5">
           <p className="flex items-center text-center sm:text-left">
-            <User /> User.name
+            <User className="mr-2" /> User.name
           </p>
-          {/* use LocalStorage for Signup, render here */}
+          <p className="pt-2">Like Trails in search to save to your profile</p>
         </CardTitle>
         <CardDescription>
-          <Textarea placeholder="Bio" className="max-w-md" />
-          {/* Add edit here for them to set bio */}
+          <Textarea
+            placeholder="Bio"
+            className="max-w-md"
+            value={bio}
+            onChange={handleBioChange}
+          />
+          <button
+            className="pt-2"
+            onClick={isEditing ? handleSaveBio : handleEditClick}
+          >
+            {isEditing ? "Save" : "Edit"}
+          </button>
+          {/* Todo: Edit and Save function is broken */}
         </CardDescription>
       </CardHeader>
       <Separator className="mb-4" />
       <CardContent>
         <div className="flex flex-col sm:flex-row justify-center items-center rounded-md gap-8 sm:gap-36 p-4">
           <p className="text-muted-foreground flex items-center">
-            <Grid3x3 />
+            <Grid3x3 className="mr-2" />
             Posts
           </p>
           <p className="text-muted-foreground flex items-center">
-            <Bookmark />
+            <Bookmark className="mr-2" />
             Bookmarks
           </p>
           <p className="text-muted-foreground flex items-center pr-2">
-            <MessageSquareMore />
+            <MessageSquareMore className="mr-2" />
             Comments
           </p>
         </div>
         <Grid />
       </CardContent>
-      <CardFooter>{/* Add Footer */}</CardFooter>
+      <CardFooter>{/* Add Footer here */}</CardFooter>
     </Card>
   );
 };
 
-export default page;
+export default ProfilePage;
