@@ -17,7 +17,7 @@ import {
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState(""); // State for the username
+  const [username, setUsername] = useState("");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -30,11 +30,11 @@ const SignUp = () => {
     }
   }, []);
 
-  const handleUsernameChange = (e: any) => {
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     localStorage.setItem("username", username);
   };
