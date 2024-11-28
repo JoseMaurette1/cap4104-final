@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -17,9 +17,26 @@ import {
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState(""); // State for the username
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
+  const handleUsernameChange = (e: any) => {
+    setUsername(e.target.value);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    localStorage.setItem("username", username);
   };
 
   return (
@@ -29,7 +46,7 @@ const SignUp = () => {
         <CardDescription>Create your account to get started</CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
             <div className="relative">
@@ -42,6 +59,8 @@ const SignUp = () => {
                 placeholder="John Doe"
                 className="pl-10"
                 required
+                value={username}
+                onChange={handleUsernameChange}
               />
             </div>
           </div>
@@ -89,7 +108,6 @@ const SignUp = () => {
       <CardFooter>
         <Button asChild className="w-full">
           <Link href="/Home">Sign Up</Link>
-          {/* Route to Home Page, Reference Wireframe */}
         </Button>
       </CardFooter>
       <CardFooter className="justify-center pl-2">

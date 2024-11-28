@@ -1,6 +1,6 @@
 "use client";
-
 import * as React from "react";
+import Link from "next/link";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Settings } from "lucide-react";
@@ -26,7 +26,8 @@ export function ModeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem>
-          <Settings /> Settings
+          <Settings />
+          <Link href={"/Settings"}>Settings</Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("light")}>
           <Sun /> Light
@@ -38,5 +39,3 @@ export function ModeToggle() {
     </DropdownMenu>
   );
 }
-
-// Todo: Add state for Light and Dark Mode, whenever you go on a new page it resets back to default

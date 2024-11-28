@@ -20,6 +20,8 @@ const ProfilePage = () => {
   const [likedTrails, setLikedTrails] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const [username, setUsername] = useState<string>("");
+  // Todo: LocalStorage is not rendering username properly from signup page
 
   const trails = [
     { image: "/yosemite.jpg", trail: "Yosemite Valley" },
@@ -33,8 +35,11 @@ const ProfilePage = () => {
   ];
 
   useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
     const storedBio = localStorage.getItem("bio");
     const storedLikes = localStorage.getItem("likedTrails");
+
+    if (storedUsername) setUsername(storedUsername);
     if (storedBio) setBio(storedBio);
     if (storedLikes) setLikedTrails(JSON.parse(storedLikes));
   }, []);
@@ -90,7 +95,7 @@ const ProfilePage = () => {
       <CardHeader>
         <CardTitle className="pb-5">
           <p className="flex items-center text-center sm:text-left">
-            <User className="mr-2" /> User.name
+            <User className="mr-2" /> {username || "User"}{" "}
           </p>
           <p className="pt-2">Like Trails in search to save to your profile</p>
         </CardTitle>
