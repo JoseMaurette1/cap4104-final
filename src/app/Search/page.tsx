@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Heart } from "lucide-react";
 
-const page = () => {
+const Page = () => {
   const trails = [
     { image: "/yosemite.jpg", trail: "Yosemite Valley" },
     { image: "/lake-louise.jpg", trail: "Lake Louise" },
@@ -66,4 +66,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
