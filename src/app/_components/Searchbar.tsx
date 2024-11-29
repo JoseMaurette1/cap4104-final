@@ -24,7 +24,6 @@ import {
 
 const Searchbar = () => {
   const [open, setOpen] = useState(false);
-  const [selectedCommand, setSelectedCommand] = useState<string | null>(null);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
