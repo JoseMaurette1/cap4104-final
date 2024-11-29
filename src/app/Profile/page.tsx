@@ -23,6 +23,8 @@ const ProfilePage = () => {
   );
   const [username, setUsername] = useState<string>("");
   const [postImages, setPostImages] = useState<string[]>([]);
+  const [clickedBookmark, setClickedBookMark] = useState<number | null>(null);
+  const [clickedPost, setClickedPost] = useState<number | null>(null);
 
   const trails = [
     { image: "/yosemite.jpg", trail: "Yosemite Valley" },
@@ -63,6 +65,13 @@ const ProfilePage = () => {
     }
   };
 
+  const handlePostGridClick = (index: number) => {
+    setClickedPost(index === clickedPost ? null : index);
+  };
+  const handleBookMarkClick = (index: number) => {
+    setClickedBookMark(index === clickedBookmark ? null : index);
+  };
+
   const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setBio(event.target.value);
   };
@@ -83,7 +92,10 @@ const ProfilePage = () => {
         .map(({ image, trail }, index) => (
           <div
             key={index}
-            className="w-1/4 aspect-square border border-gray-400 rounded-md overflow-hidden"
+            className={` ${
+              clickedBookmark === index ? "scale-150  " : ""
+            } w-1/4 aspect-square border border-gray-400 rounded-md overflow-hidden`}
+            onClick={() => handleBookMarkClick(index)}
           >
             <Image
               src={image}
@@ -103,7 +115,10 @@ const ProfilePage = () => {
         postImages.map((image, index) => (
           <div
             key={index}
-            className="w-1/4 aspect-square border border-gray-400 rounded-md overflow-hidden"
+            className={` ${
+              clickedPost === index ? "scale-150" : ""
+            } w-1/4 aspect-square border border-gray-400 rounded-md overflow-hidden`}
+            onClick={() => handlePostGridClick(index)}
           >
             <Image
               src={image}
