@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from "next/navigation";
 import * as React from "react";
 import Link from "next/link";
 import { Moon, Sun } from "lucide-react";
@@ -15,6 +16,10 @@ import {
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const isSignInPage = pathname === "/Signup";
+  const shouldHideSettings = isHomePage || isSignInPage;
 
   return (
     <DropdownMenu>
@@ -25,10 +30,17 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>
-          <Settings />
-          <Link href={"/Settings"}>Settings</Link>
-        </DropdownMenuItem>
+        {!shouldHideSettings ? (
+          <DropdownMenuItem>
+            <Settings />
+            <Link href={"/Settings"}>Settings</Link>
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem disabled>
+            <Settings />
+            Settings (Disabled)
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem onClick={() => setTheme("light")}>
           <Sun /> Light
         </DropdownMenuItem>
