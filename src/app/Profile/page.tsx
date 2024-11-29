@@ -134,14 +134,14 @@ const ProfilePage = () => {
             placeholder="Bio"
             className="max-w-md"
             value={bio}
-            disabled={isEditing}
+            disabled={!isEditing}
             onChange={handleBioChange}
           />
           <button
             className="pt-2"
             onClick={isEditing ? handleSaveBio : () => setIsEditing(true)}
           >
-            {isEditing ? "Edit" : "Save"}
+            {isEditing ? "Save" : "Edit"}
           </button>
         </CardDescription>
       </CardHeader>
