@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { User, Bookmark, MessageSquareMore, Grid3x3 } from "lucide-react";
 import {
   Card,
@@ -21,7 +22,7 @@ const ProfilePage = () => {
     {}
   );
   const [username, setUsername] = useState<string>("");
-  // Todo: LocalStorage is not rendering username properly from signup page
+  const [postImages, setPostImages] = useState<string[]>([]);
 
   const trails = [
     { image: "/yosemite.jpg", trail: "Yosemite Valley" },
@@ -37,12 +38,30 @@ const ProfilePage = () => {
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
     const storedBio = localStorage.getItem("bio");
+    const storedPosts = localStorage.getItem("postImages");
     const storedLikes = localStorage.getItem("likedTrails");
 
-    if (storedUsername) setUsername(storedUsername);
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+    if (storedPosts) setPostImages(JSON.parse(storedPosts));
     if (storedBio) setBio(storedBio);
     if (storedLikes) setLikedTrails(JSON.parse(storedLikes));
   }, []);
+
+  const addPostImage = (imageUrl: string) => {
+    const updatedPosts = [...postImages, imageUrl];
+    setPostImages(updatedPosts);
+    localStorage.setItem("postImages", JSON.stringify(updatedPosts));
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      addPostImage(imageUrl);
+    }
+  };
 
   const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setBio(event.target.value);
@@ -79,14 +98,25 @@ const ProfilePage = () => {
   );
 
   const PostsGrid = () => (
-    <div className="flex flex-wrap w-full max-w-xl mx-auto">
-      {[...Array(16)].map((_, index) => (
-        <div
-          key={index}
-          className="w-1/4 aspect-square border border-gray-400"
-          style={{ boxSizing: "border-box" }}
-        />
-      ))}
+    <div className="flex flex-wrap w-full max-w-xl mx-auto gap-4">
+      {postImages.length > 0 ? (
+        postImages.map((image, index) => (
+          <div
+            key={index}
+            className="w-1/4 aspect-square border border-gray-400 rounded-md overflow-hidden"
+          >
+            <Image
+              src={image}
+              alt={`Post ${index + 1}`}
+              width={300}
+              height={300}
+              className="object-cover w-full h-full"
+            />
+          </div>
+        ))
+      ) : (
+        <p className="text-gray-500">No posts yet!</p>
+      )}
     </div>
   );
 
@@ -95,7 +125,7 @@ const ProfilePage = () => {
       <CardHeader>
         <CardTitle className="pb-5">
           <p className="flex items-center text-center sm:text-left">
-            <User className="mr-2" /> {username || "User"}{" "}
+            <User className="mr-2" /> {username || "user"}
           </p>
           <p className="pt-2">Like Trails in search to save to your profile</p>
         </CardTitle>
@@ -146,7 +176,19 @@ const ProfilePage = () => {
           </p>
         </div>
         {activeSection === "Bookmarks" && <BookmarksGrid />}
-        {activeSection === "Posts" && <PostsGrid />}
+        {activeSection === "Posts" && (
+          <>
+            <div className="mb-4">
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="mb-2"
+              />
+            </div>
+            <PostsGrid />
+          </>
+        )}
         {activeSection === "Comments" && <p>Display Comments Here</p>}
       </CardContent>
       <CardFooter>{/* Add Footer here */}</CardFooter>

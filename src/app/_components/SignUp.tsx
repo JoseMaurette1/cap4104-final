@@ -31,7 +31,9 @@ const SignUp = () => {
   }, []);
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+    const value = e.target.value;
+    setUsername(value);
+    localStorage.setItem("username", value);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
