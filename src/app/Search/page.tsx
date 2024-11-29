@@ -1,4 +1,5 @@
 "use client";
+import { toast } from "sonner";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Heart } from "lucide-react";
@@ -31,9 +32,18 @@ const Page = () => {
       ...likedTrails,
       [trailName]: !likedTrails[trailName],
     };
-
     setLikedTrails(updatedLikedTrails);
     localStorage.setItem("likedTrails", JSON.stringify(updatedLikedTrails));
+  };
+
+  const handlePopup = () => {
+    toast.success("Trail has been Bookmarked ", {
+      description: "Bookmarks are saved under Profile",
+      action: {
+        label: "Confirm",
+        onClick: () => console.log("Approved"),
+      },
+    });
   };
 
   return (
@@ -46,7 +56,10 @@ const Page = () => {
           <h3 className="text-xl flex text-center font-semibold p-4">
             {trail}{" "}
             <Heart
-              onClick={() => handleLike(trail)}
+              onClick={() => {
+                handleLike(trail);
+                handlePopup();
+              }}
               fill={likedTrails[trail] ? "red" : "none"}
               className="ml-2 hover:text-red-500 cursor-pointer"
             />

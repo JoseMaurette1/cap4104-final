@@ -1,4 +1,5 @@
 "use client";
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "./_components/themeprovider";
 import Logo from "./_components/Logo";
 import Navbar from "./_components/Navbar";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: LayoutProps) {
           {/* only renders navbar when signed in */}
           {!shouldHideNavbar && <Navbar />}
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
