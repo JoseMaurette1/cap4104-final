@@ -1,12 +1,7 @@
 import React from "react";
 
 const page = () => {
-  return (
-    <div>
-      <h1>Upload Pictures</h1>
-      <p>Work in Progress</p>
-    </div>
-  );
+  return <div>Nothing Here for now</div>;
 };
 
 export default page;

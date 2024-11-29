@@ -1,13 +1,13 @@
 import React from "react";
-import { User, Search, Camera } from "lucide-react";
-// import {Mountain} from "lucide-react"
+import { User, Search, Mountain } from "lucide-react";
+// import { Camera } from "lucide-react";
 import Link from "next/link";
 
 const Navbar = () => {
   const icons = [
     { href: "/Search", Icon: Search },
-    // { href: "/Trails", Icon: Mountain },
-    { href: "/Camera", Icon: Camera },
+    { href: "/Trails", Icon: Mountain },
+    // { href: "/Camera", Icon: Camera },
     { href: "/Profile", Icon: User },
   ];
   return (
