@@ -51,7 +51,7 @@ const Page = () => {
               className="ml-2 hover:text-red-500 cursor-pointer"
             />
           </h3>
-          <div className="p-4">
+          <div className="p-2">
             <Image
               src={image}
               alt={trail}
