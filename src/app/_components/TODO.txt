@@ -1,0 +1,9 @@
+edit/save does not work properly.
+
+make edit save box uneditable until you click to edit on it.
+
+localStorage bugs posts after refresh.
+
+Clicking on settings allows you to skip sign up.
+
+Add option to enlarge image, hover maybe.
