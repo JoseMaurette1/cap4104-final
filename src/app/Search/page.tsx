@@ -36,12 +36,21 @@ const Page = () => {
     localStorage.setItem("likedTrails", JSON.stringify(updatedLikedTrails));
   };
 
-  const handlePopup = () => {
+  const handleAdd = () => {
     toast.success("Trail has been Bookmarked ", {
       description: "Bookmarks are saved under Profile",
       action: {
         label: "Confirm",
         onClick: () => console.log("Approved"),
+      },
+    });
+  };
+
+  const handleDelete = () => {
+    toast.warning("Bookmark has been deleted", {
+      action: {
+        label: "Confirm",
+        onClick: () => console.log("Bookmark Deleted"),
       },
     });
   };
@@ -58,7 +67,9 @@ const Page = () => {
             <Heart
               onClick={() => {
                 handleLike(trail);
-                handlePopup();
+                {
+                  likedTrails[trail] ? handleDelete() : handleAdd();
+                }
               }}
               fill={likedTrails[trail] ? "red" : "none"}
               className="ml-2 hover:text-red-500 cursor-pointer"
