@@ -67,7 +67,11 @@ const Page = () => {
             <Heart
               onClick={() => {
                 handleLike(trail);
-                likedTrails[trail] ? handleDelete() : handleAdd();
+                if (likedTrails[trail]) {
+                  handleDelete();
+                } else {
+                  handleAdd();
+                }
               }}
               fill={likedTrails[trail] ? "red" : "none"}
               className="ml-2 hover:text-red-500 cursor-pointer"
