@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import TrailDrawer from "./TrailDrawer";
 import Link from "next/link";
 import {
   Search,
@@ -55,13 +56,12 @@ const Searchbar = () => {
                 <Search className="mr-2" />
                 <span>Search</span>
               </CommandItem>
-            </Link>{" "}
-            <Link href={"/Trails"}>
-              <CommandItem>
-                <Mountain />
-                <span>Choose Trail</span>
-              </CommandItem>
             </Link>
+            <CommandItem>
+              <TrailDrawer />
+              {/* <Mountain />
+              <span>Choose Trail</span> */}
+            </CommandItem>
             <Link href={"https://cap4104.vercel.app"}>
               <CommandItem>
                 <Lightbulb />
