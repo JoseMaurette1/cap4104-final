@@ -14,7 +14,7 @@ const Logo = () => {
       <div className="absolute top-4 left-4 sm:left-5 z-10">
         {!noAccessLogo ? (
           <Link href={"/Home"}>
-            <h1 className="font-bold text-xl sm:text-xl border-double border-gray-400 border-4 p-2 rounded hover:border-solid transform transition-transform duration-300 hover:translate-y-[-4px]">
+            <h1 className="text-3xl font-extrabold tracking-tighter md:text-5xl">
               TrailTales
             </h1>
           </Link>
