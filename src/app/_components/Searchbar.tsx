@@ -3,14 +3,7 @@
 import React, { useState, useEffect } from "react";
 import TrailDrawer from "./TrailDrawer";
 import Link from "next/link";
-import {
-  Search,
-  Lightbulb,
-  Mountain,
-  Settings,
-  User,
-  House,
-} from "lucide-react";
+import { Search, Lightbulb, Settings, User, House } from "lucide-react";
 
 import {
   CommandDialog,
@@ -59,8 +52,6 @@ const Searchbar = () => {
             </Link>
             <CommandItem>
               <TrailDrawer />
-              {/* <Mountain />
-              <span>Choose Trail</span> */}
             </CommandItem>
             <Link href={"https://cap4104.vercel.app"}>
               <CommandItem>
