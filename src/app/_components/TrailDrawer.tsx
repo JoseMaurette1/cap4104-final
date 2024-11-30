@@ -15,10 +15,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-const data = [
-  // render some info here
-];
-
 const TrailDrawer = () => {
   return (
     <Drawer>
