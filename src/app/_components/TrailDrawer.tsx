@@ -23,9 +23,9 @@ const TrailDrawer = () => {
   return (
     <Drawer>
       <DrawerTrigger>
-        <span className="flex items-center">
+        <div className="flex items-center w-full cursor-pointer">
           <Mountain className="mr-2" /> Choose Trail
-        </span>
+        </div>
       </DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
