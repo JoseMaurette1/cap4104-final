@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import TrailDrawer from "./TrailDrawer";
 import Link from "next/link";
@@ -11,7 +10,6 @@ import {
   House,
   ChartNoAxesColumnIncreasing,
 } from "lucide-react";
-
 import {
   CommandDialog,
   CommandEmpty,
@@ -33,25 +31,22 @@ const Searchbar = () => {
         setOpen((open) => !open);
       }
     };
-
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
   }, []);
 
+  const handleLinkClick = () => {
+    setOpen(false);
+  };
+
   return (
     <>
-      <p className="text-md text-muted-foreground">
-        Press{" "}
-        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[20px] font-medium text-muted-foreground opacity-100">
-          <span className="text-md">⌘</span>J
-        </kbd>
-      </p>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <Link href={"/Search"}>
+            <Link href={"/Search"} onClick={handleLinkClick}>
               <CommandItem>
                 <Search className="mr-2" />
                 <span>Search</span>
@@ -60,13 +55,13 @@ const Searchbar = () => {
             <CommandItem>
               <TrailDrawer />
             </CommandItem>
-            <Link href={"https://cap4104.vercel.app"}>
+            <Link href={"https://cap4104.vercel.app"} onClick={handleLinkClick}>
               <CommandItem>
                 <Lightbulb />
                 <span>Prototype Website</span>
               </CommandItem>
             </Link>
-            <Link href={"/DesignEvaluation"}>
+            <Link href={"/DesignEvaluation"} onClick={handleLinkClick}>
               <CommandItem>
                 <ChartNoAxesColumnIncreasing />
                 <span>Design Evaluation</span>
@@ -75,21 +70,21 @@ const Searchbar = () => {
           </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Settings">
-            <Link href={"/Profile"}>
+            <Link href={"/Profile"} onClick={handleLinkClick}>
               <CommandItem>
                 <User />
                 <span>Profile</span>
                 <CommandShortcut>⌘P</CommandShortcut>
               </CommandItem>
             </Link>
-            <Link href={"/Home"}>
+            <Link href={"/Home"} onClick={handleLinkClick}>
               <CommandItem>
                 <House />
                 <span>Home</span>
                 <CommandShortcut>⌘B</CommandShortcut>
               </CommandItem>
             </Link>
-            <Link href={"/Settings"}>
+            <Link href={"/Settings"} onClick={handleLinkClick}>
               <CommandItem>
                 <Settings />
                 <span>Settings</span>
@@ -102,4 +97,5 @@ const Searchbar = () => {
     </>
   );
 };
+
 export default Searchbar;
