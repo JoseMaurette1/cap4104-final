@@ -56,7 +56,7 @@ const Searchbar = () => {
             <CommandItem>
               <TrailDrawer />
             </CommandItem>
-            <Link href={"/Prototype"}>
+            <Link href={"/Prototype"} onClick={handleLinkClick}>
               <CommandItem>
                 <Lightbulb />
                 <span>Prototype Design</span>
