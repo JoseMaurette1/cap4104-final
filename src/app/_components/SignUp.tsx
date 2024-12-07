@@ -18,6 +18,9 @@ import {
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -30,15 +33,34 @@ const SignUp = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (username && email && password) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [username, email, password]);
+
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setUsername(value);
     localStorage.setItem("username", value);
   };
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     localStorage.setItem("username", username);
+    localStorage.setItem("email", email);
+    localStorage.setItem("password", password);
   };
 
   return (
@@ -79,6 +101,8 @@ const SignUp = () => {
                 placeholder="john@gmail.com"
                 className="pl-10"
                 required
+                value={email}
+                onChange={handleEmailChange}
               />
             </div>
           </div>
@@ -95,6 +119,8 @@ const SignUp = () => {
                 type={showPassword ? "text" : "password"}
                 className="pl-10 pr-10"
                 required
+                value={password}
+                onChange={handlePasswordChange}
               />
               <button
                 type="button"
@@ -108,8 +134,8 @@ const SignUp = () => {
         </form>
       </CardContent>
       <CardFooter>
-        <Button asChild className="w-full">
-          <Link href="/Home">Sign Up</Link>
+        <Button asChild className="w-full" disabled={!isFormValid}>
+          <Link href={isFormValid ? "/Home" : "#"}>Sign Up</Link>
         </Button>
       </CardFooter>
       <CardFooter className="justify-center pl-2">
