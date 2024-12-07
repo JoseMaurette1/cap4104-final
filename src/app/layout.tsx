@@ -4,6 +4,7 @@ import { ThemeProvider } from "./_components/themeprovider";
 import Logo from "./_components/Logo";
 import Navbar from "./_components/Navbar";
 import { usePathname } from "next/navigation";
+import Searchbar from "./_components/Searchbar";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps) {
           disableTransitionOnChange
         >
           <Logo />
+          <Searchbar />
           {/* only renders navbar when signed in */}
           {!shouldHideNavbar && <Navbar />}
           {children}
