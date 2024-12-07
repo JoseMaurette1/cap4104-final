@@ -3,7 +3,14 @@
 import React, { useState, useEffect } from "react";
 import TrailDrawer from "./TrailDrawer";
 import Link from "next/link";
-import { Search, Lightbulb, Settings, User, House } from "lucide-react";
+import {
+  Search,
+  Lightbulb,
+  Settings,
+  User,
+  House,
+  ChartNoAxesColumnIncreasing,
+} from "lucide-react";
 
 import {
   CommandDialog,
@@ -57,6 +64,12 @@ const Searchbar = () => {
               <CommandItem>
                 <Lightbulb />
                 <span>Prototype Website</span>
+              </CommandItem>
+            </Link>
+            <Link href={"/DesignEvaluation"}>
+              <CommandItem>
+                <ChartNoAxesColumnIncreasing />
+                <span>Design Evaluation</span>
               </CommandItem>
             </Link>
           </CommandGroup>
