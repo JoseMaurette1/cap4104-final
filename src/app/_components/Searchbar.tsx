@@ -8,6 +8,7 @@ import {
   Lightbulb,
   Settings,
   User,
+  ArrowRightCircle,
   House,
   ChartNoAxesColumnIncreasing,
 } from "lucide-react";
@@ -60,10 +61,16 @@ const Searchbar = () => {
             <CommandItem>
               <TrailDrawer />
             </CommandItem>
-            <Link href={"https://cap4104.vercel.app"}>
+            <Link href={"/Prototype"}>
               <CommandItem>
                 <Lightbulb />
-                <span>Prototype Website</span>
+                <span>Prototype Design</span>
+              </CommandItem>
+            </Link>
+            <Link href={"https://cap4104.vercel.app"}>
+              <CommandItem>
+                <ArrowRightCircle />
+                <span>Original Website</span>
               </CommandItem>
             </Link>
             <Link href={"/DesignEvaluation"}>
