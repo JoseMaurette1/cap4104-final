@@ -1,6 +1,2 @@
-Make Home page
 localStorage bugs posts after refresh, implement Database.
 Work on comments section
-Allow enter to searchbar
-Make Traildrawer be able to be clicked on like a div
-Make Traildrawer display Trails from Trails.tsx
